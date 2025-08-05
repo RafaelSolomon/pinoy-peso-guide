@@ -2,41 +2,82 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+/* PesoWise Design System - Professional Filipino Finance App
 All colors MUST be HSL.
 */
 
 @layer base {
   :root {
+    /* Core backgrounds */
     --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --foreground: 222 30% 13%;
 
+    /* Card & surfaces */
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 222 30% 13%;
 
+    /* Popover & overlays */
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 222 30% 13%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Primary - Deep Philippine Blue (trustworthy, professional) */
+    --primary: 217 91% 24%;
+    --primary-foreground: 0 0% 98%;
+    --primary-light: 217 91% 35%;
+    --primary-hover: 217 91% 20%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    /* Secondary - Soft neutral */
+    --secondary: 220 14% 96%;
+    --secondary-foreground: 222 30% 13%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    /* Muted tones */
+    --muted: 220 14% 96%;
+    --muted-foreground: 220 9% 46%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    /* Accent - Prosperity Gold */
+    --accent: 45 93% 47%;
+    --accent-foreground: 222 30% 13%;
+    --accent-light: 45 93% 57%;
+    --accent-hover: 45 93% 42%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    /* Success - Fresh Financial Green */
+    --success: 142 76% 36%;
+    --success-foreground: 0 0% 98%;
+    --success-light: 142 69% 58%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    /* Warning - Warm Alert Orange */
+    --warning: 25 95% 53%;
+    --warning-foreground: 0 0% 98%;
 
-    --radius: 0.5rem;
+    /* Destructive - Error Red */
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+
+    /* Borders & inputs */
+    --border: 220 14% 91%;
+    --input: 220 14% 91%;
+    --ring: 217 91% 24%;
+
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(217 91% 24%), hsl(217 91% 35%));
+    --gradient-success: linear-gradient(135deg, hsl(142 76% 36%), hsl(142 69% 58%));
+    --gradient-accent: linear-gradient(135deg, hsl(45 93% 47%), hsl(45 93% 57%));
+    --gradient-hero: linear-gradient(135deg, hsl(217 91% 24%) 0%, hsl(217 91% 35%) 50%, hsl(45 93% 47%) 100%);
+
+    /* Shadows */
+    --shadow-primary: 0 10px 30px -10px hsl(217 91% 24% / 0.3);
+    --shadow-accent: 0 8px 25px -8px hsl(45 93% 47% / 0.25);
+    --shadow-card: 0 4px 20px -4px hsl(222 30% 13% / 0.1);
+
+    /* Typography scale */
+    --font-heading: 'Inter', system-ui, sans-serif;
+    --font-body: 'Inter', system-ui, sans-serif;
+
+    /* Animations */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+    --radius: 0.75rem;
 
     --sidebar-background: 0 0% 98%;
 
@@ -56,33 +97,55 @@ All colors MUST be HSL.
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
+    /* Dark mode backgrounds */
+    --background: 222 30% 8%;
+    --foreground: 0 0% 95%;
 
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
+    /* Dark card & surfaces */
+    --card: 222 30% 11%;
+    --card-foreground: 0 0% 95%;
 
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
+    /* Dark popover & overlays */
+    --popover: 222 30% 11%;
+    --popover-foreground: 0 0% 95%;
 
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
+    /* Dark primary - Bright Philippine Blue */
+    --primary: 217 91% 60%;
+    --primary-foreground: 222 30% 8%;
+    --primary-light: 217 91% 70%;
+    --primary-hover: 217 91% 55%;
 
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
+    /* Dark secondary */
+    --secondary: 222 30% 15%;
+    --secondary-foreground: 0 0% 95%;
 
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+    /* Dark muted tones */
+    --muted: 222 30% 15%;
+    --muted-foreground: 0 0% 65%;
 
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
+    /* Dark accent - Bright Prosperity Gold */
+    --accent: 45 93% 60%;
+    --accent-foreground: 222 30% 8%;
+    --accent-light: 45 93% 70%;
+    --accent-hover: 45 93% 55%;
 
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
+    /* Dark success */
+    --success: 142 69% 58%;
+    --success-foreground: 222 30% 8%;
+    --success-light: 142 69% 68%;
 
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
+    /* Dark warning */
+    --warning: 25 95% 60%;
+    --warning-foreground: 222 30% 8%;
+
+    /* Dark destructive */
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 95%;
+
+    /* Dark borders & inputs */
+    --border: 222 30% 20%;
+    --input: 222 30% 20%;
+    --ring: 217 91% 60%;
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
     --sidebar-primary: 224.3 76.3% 48%;

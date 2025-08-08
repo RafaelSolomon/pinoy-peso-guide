@@ -7,6 +7,9 @@ import { useState } from "react";
 import Index from "./pages/Index";
 import Budgeting from "./pages/Budgeting";
 import Investing from "./pages/Investing";
+import Tools from "./pages/Tools";
+import Insurance from "./pages/Insurance";
+import About from "./pages/About";
 import NotFound from "./pages/NotFound";
 import Header from "./components/Header";
 
@@ -31,6 +34,9 @@ const App = () => {
           <Route path="/" element={<Index />} />
           <Route path="/budgeting" element={<Budgeting />} />
           <Route path="/investing" element={<Investing />} />
+          <Route path="/tools" element={<Tools />} />
+          <Route path="/insurance" element={<Insurance />} />
+          <Route path="/about" element={<About />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

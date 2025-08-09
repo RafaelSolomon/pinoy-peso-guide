@@ -12,6 +12,9 @@ import Tools from "./pages/Tools";
 import Insurance from "./pages/Insurance";
 import About from "./pages/About";
 import NotFound from "./pages/NotFound";
+import BudgetCalculator from "./pages/calculators/BudgetCalculator";
+import EmergencyFundCalculator from "./pages/calculators/EmergencyFundCalculator";
+import InvestmentCalculator from "./pages/calculators/InvestmentCalculator";
 import Header from "./components/Header";
 
 const App = () => {
@@ -37,6 +40,9 @@ const App = () => {
               <Route path="/budgeting" element={<Budgeting />} />
               <Route path="/investing" element={<Investing />} />
               <Route path="/tools" element={<Tools />} />
+              <Route path="/tools/budget-calculator" element={<BudgetCalculator />} />
+              <Route path="/tools/emergency-fund-calculator" element={<EmergencyFundCalculator />} />
+              <Route path="/tools/investment-calculator" element={<InvestmentCalculator />} />
               <Route path="/insurance" element={<Insurance />} />
               <Route path="/about" element={<About />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

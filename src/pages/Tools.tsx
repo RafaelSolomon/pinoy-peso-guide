@@ -1,6 +1,7 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Calculator, PiggyBank, TrendingUp, DollarSign, Target, Calendar } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Tools = () => {
   const tools = [
@@ -8,37 +9,46 @@ const Tools = () => {
       title: "Budget Calculator",
       description: "Calculate your monthly budget using the 50/30/20 rule adapted for Filipino income levels.",
       icon: <Calculator className="h-8 w-8 text-primary" />,
-      category: "Budgeting"
+      category: "Budgeting",
+      route: "/tools/budget-calculator"
     },
     {
       title: "Emergency Fund Calculator",
       description: "Determine how much you need to save for emergencies based on your expenses.",
       icon: <PiggyBank className="h-8 w-8 text-success" />,
-      category: "Savings"
+      category: "Savings",
+      route: "/tools/emergency-fund-calculator"
     },
     {
       title: "Investment Growth Calculator",
       description: "See how your investments can grow over time with compound interest.",
       icon: <TrendingUp className="h-8 w-8 text-accent" />,
-      category: "Investing"
+      category: "Investing",
+      route: "/tools/investment-calculator"
     },
     {
       title: "Debt Payoff Calculator",
       description: "Create a strategy to pay off credit cards and loans faster.",
       icon: <DollarSign className="h-8 w-8 text-warning" />,
-      category: "Debt Management"
+      category: "Debt Management",
+      route: "/tools/debt-calculator",
+      comingSoon: true
     },
     {
       title: "Retirement Calculator",
       description: "Plan for your retirement with SSS, GSIS, and private savings calculations.",
       icon: <Target className="h-8 w-8 text-primary" />,
-      category: "Retirement"
+      category: "Retirement",
+      route: "/tools/retirement-calculator",
+      comingSoon: true
     },
     {
       title: "Financial Goal Tracker",
       description: "Set and track your financial goals like house down payment or vacation fund.",
       icon: <Calendar className="h-8 w-8 text-success" />,
-      category: "Goal Setting"
+      category: "Goal Setting",
+      route: "/tools/goal-tracker",
+      comingSoon: true
     }
   ];
 
@@ -65,6 +75,11 @@ const Tools = () => {
                     <div className="text-sm text-accent font-medium mt-1">
                       {tool.category}
                     </div>
+                    {tool.comingSoon && (
+                      <div className="text-xs text-muted-foreground mt-1">
+                        Coming Soon
+                      </div>
+                    )}
                   </div>
                 </div>
                 <CardDescription className="text-base mt-4">
@@ -72,9 +87,15 @@ const Tools = () => {
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <Button variant="outline" className="w-full group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
-                  Use Calculator
-                </Button>
+                {tool.comingSoon ? (
+                  <Button variant="outline" className="w-full" disabled>
+                    Coming Soon
+                  </Button>
+                ) : (
+                  <Button asChild variant="outline" className="w-full group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
+                    <Link to={tool.route}>Use Calculator</Link>
+                  </Button>
+                )}
               </CardContent>
             </Card>
           ))}

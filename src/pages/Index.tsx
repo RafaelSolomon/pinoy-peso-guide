@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { TrendingUp, Shield, BookOpen, Calculator, Users, Star } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Index = () => {
   return (
@@ -28,11 +29,11 @@ const Index = () => {
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" className="bg-white text-primary hover:bg-white/90 shadow-lg">
-                Start Your Journey
+              <Button asChild size="lg" className="bg-white text-primary hover:bg-white/90 shadow-lg">
+                <Link to="/budgeting">Start Your Journey</Link>
               </Button>
-              <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10">
-                Learn More
+              <Button asChild size="lg" variant="outline" className="border-white text-white hover:bg-white/10">
+                <Link to="/about">Learn More</Link>
               </Button>
             </div>
           </div>
@@ -52,77 +53,89 @@ const Index = () => {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <Card className="group hover:shadow-card transition-all duration-300 border-border/50 hover:border-primary/20">
-              <CardHeader>
-                <div className="w-12 h-12 bg-gradient-to-br from-primary to-primary-light rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                  <BookOpen className="w-6 h-6 text-white" />
-                </div>
-                <CardTitle className="text-xl">Budgeting Basics</CardTitle>
-                <CardDescription>
-                  Learn practical budgeting strategies that work with Filipino income patterns and expenses.
-                </CardDescription>
-              </CardHeader>
-            </Card>
+            <Link to="/budgeting" className="block">
+              <Card className="group hover:shadow-card transition-all duration-300 border-border/50 hover:border-primary/20 cursor-pointer h-full">
+                <CardHeader>
+                  <div className="w-12 h-12 bg-gradient-to-br from-primary to-primary-light rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                    <BookOpen className="w-6 h-6 text-white" />
+                  </div>
+                  <CardTitle className="text-xl">Budgeting Basics</CardTitle>
+                  <CardDescription>
+                    Learn practical budgeting strategies that work with Filipino income patterns and expenses.
+                  </CardDescription>
+                </CardHeader>
+              </Card>
+            </Link>
 
-            <Card className="group hover:shadow-card transition-all duration-300 border-border/50 hover:border-success/20">
-              <CardHeader>
-                <div className="w-12 h-12 bg-gradient-to-br from-success to-success-light rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                  <TrendingUp className="w-6 h-6 text-white" />
-                </div>
-                <CardTitle className="text-xl">Investment Guide</CardTitle>
-                <CardDescription>
-                  Discover investment opportunities in the Philippines from stocks to real estate and OFW options.
-                </CardDescription>
-              </CardHeader>
-            </Card>
+            <Link to="/investing" className="block">
+              <Card className="group hover:shadow-card transition-all duration-300 border-border/50 hover:border-success/20 cursor-pointer h-full">
+                <CardHeader>
+                  <div className="w-12 h-12 bg-gradient-to-br from-success to-success-light rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                    <TrendingUp className="w-6 h-6 text-white" />
+                  </div>
+                  <CardTitle className="text-xl">Investment Guide</CardTitle>
+                  <CardDescription>
+                    Discover investment opportunities in the Philippines from stocks to real estate and OFW options.
+                  </CardDescription>
+                </CardHeader>
+              </Card>
+            </Link>
 
-            <Card className="group hover:shadow-card transition-all duration-300 border-border/50 hover:border-accent/20">
-              <CardHeader>
-                <div className="w-12 h-12 bg-gradient-to-br from-accent to-accent-light rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                  <Calculator className="w-6 h-6 text-white" />
-                </div>
-                <CardTitle className="text-xl">Financial Tools</CardTitle>
-                <CardDescription>
-                  Interactive calculators for loans, savings, and retirement planning with peso-specific features.
-                </CardDescription>
-              </CardHeader>
-            </Card>
+            <Link to="/tools" className="block">
+              <Card className="group hover:shadow-card transition-all duration-300 border-border/50 hover:border-accent/20 cursor-pointer h-full">
+                <CardHeader>
+                  <div className="w-12 h-12 bg-gradient-to-br from-accent to-accent-light rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                    <Calculator className="w-6 h-6 text-white" />
+                  </div>
+                  <CardTitle className="text-xl">Financial Tools</CardTitle>
+                  <CardDescription>
+                    Interactive calculators for loans, savings, and retirement planning with peso-specific features.
+                  </CardDescription>
+                </CardHeader>
+              </Card>
+            </Link>
 
-            <Card className="group hover:shadow-card transition-all duration-300 border-border/50 hover:border-primary/20">
-              <CardHeader>
-                <div className="w-12 h-12 bg-gradient-to-br from-primary to-primary-light rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                  <Shield className="w-6 h-6 text-white" />
-                </div>
-                <CardTitle className="text-xl">Insurance & Protection</CardTitle>
-                <CardDescription>
-                  Understand insurance options, health coverage, and financial protection for your family.
-                </CardDescription>
-              </CardHeader>
-            </Card>
+            <Link to="/insurance" className="block">
+              <Card className="group hover:shadow-card transition-all duration-300 border-border/50 hover:border-primary/20 cursor-pointer h-full">
+                <CardHeader>
+                  <div className="w-12 h-12 bg-gradient-to-br from-primary to-primary-light rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                    <Shield className="w-6 h-6 text-white" />
+                  </div>
+                  <CardTitle className="text-xl">Insurance & Protection</CardTitle>
+                  <CardDescription>
+                    Understand insurance options, health coverage, and financial protection for your family.
+                  </CardDescription>
+                </CardHeader>
+              </Card>
+            </Link>
 
-            <Card className="group hover:shadow-card transition-all duration-300 border-border/50 hover:border-accent/20">
-              <CardHeader>
-                <div className="w-12 h-12 bg-gradient-to-br from-accent to-accent-light rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                  <Users className="w-6 h-6 text-white" />
-                </div>
-                <CardTitle className="text-xl">Family Finance</CardTitle>
-                <CardDescription>
-                  Special guidance for OFW families, multi-generational planning, and cultural considerations.
-                </CardDescription>
-              </CardHeader>
-            </Card>
+            <Link to="/about" className="block">
+              <Card className="group hover:shadow-card transition-all duration-300 border-border/50 hover:border-accent/20 cursor-pointer h-full">
+                <CardHeader>
+                  <div className="w-12 h-12 bg-gradient-to-br from-accent to-accent-light rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                    <Users className="w-6 h-6 text-white" />
+                  </div>
+                  <CardTitle className="text-xl">Family Finance</CardTitle>
+                  <CardDescription>
+                    Special guidance for OFW families, multi-generational planning, and cultural considerations.
+                  </CardDescription>
+                </CardHeader>
+              </Card>
+            </Link>
 
-            <Card className="group hover:shadow-card transition-all duration-300 border-border/50 hover:border-success/20">
-              <CardHeader>
-                <div className="w-12 h-12 bg-gradient-to-br from-success to-success-light rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                  <Star className="w-6 h-6 text-white" />
-                </div>
-                <CardTitle className="text-xl">Expert Insights</CardTitle>
-                <CardDescription>
-                  Learn from Filipino financial experts and real success stories from local families.
-                </CardDescription>
-              </CardHeader>
-            </Card>
+            <Link to="/about" className="block">
+              <Card className="group hover:shadow-card transition-all duration-300 border-border/50 hover:border-success/20 cursor-pointer h-full">
+                <CardHeader>
+                  <div className="w-12 h-12 bg-gradient-to-br from-success to-success-light rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                    <Star className="w-6 h-6 text-white" />
+                  </div>
+                  <CardTitle className="text-xl">Expert Insights</CardTitle>
+                  <CardDescription>
+                    Learn from Filipino financial experts and real success stories from local families.
+                  </CardDescription>
+                </CardHeader>
+              </Card>
+            </Link>
           </div>
         </div>
       </section>
@@ -136,8 +149,8 @@ const Index = () => {
           <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
             Join thousands of Filipino families who have already started their journey to financial freedom.
           </p>
-          <Button size="lg" className="bg-white text-primary hover:bg-white/90 shadow-lg">
-            Get Started Today
+          <Button asChild size="lg" className="bg-white text-primary hover:bg-white/90 shadow-lg">
+            <Link to="/budgeting">Get Started Today</Link>
           </Button>
         </div>
       </section>

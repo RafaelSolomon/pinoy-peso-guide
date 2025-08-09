@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { ThemeToggle } from "@/components/ThemeToggle";
 import { Menu, Wallet } from "lucide-react";
 
 const Header = () => {
@@ -45,6 +46,7 @@ const Header = () => {
         </nav>
 
         <div className="flex items-center space-x-4">
+          <ThemeToggle />
           <Button variant="outline" className="hidden md:inline-flex">
             Sign In
           </Button>

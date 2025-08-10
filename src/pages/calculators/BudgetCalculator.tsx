@@ -1,24 +1,44 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { ArrowLeft } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useFinancialProfile } from "@/hooks/useFinancialProfile";
+import SmartRecommendations from "@/components/SmartRecommendations";
 
 const BudgetCalculator = () => {
+  const { preFillData, updateProfile } = useFinancialProfile('budget-calculator');
   const [monthlyIncome, setMonthlyIncome] = useState("");
   const [results, setResults] = useState(null);
+
+  // Auto-fill from profile when available
+  useEffect(() => {
+    if (preFillData.monthlyIncome && !monthlyIncome) {
+      setMonthlyIncome(preFillData.monthlyIncome.toString());
+    }
+  }, [preFillData, monthlyIncome]);
 
   const calculateBudget = () => {
     const income = parseFloat(monthlyIncome);
     if (income > 0) {
-      setResults({
+      const budgetResults = {
         needs: income * 0.5,
         wants: income * 0.3,
         savings: income * 0.2,
         total: income
-      });
+      };
+      
+      setResults(budgetResults);
+      
+      // Update financial profile
+      updateProfile({
+        income: income,
+        needs: budgetResults.needs,
+        wants: budgetResults.wants,
+        savings: budgetResults.savings
+      }, 'budget-calculator');
     }
   };
 
@@ -35,13 +55,15 @@ const BudgetCalculator = () => {
             <h1 className="text-3xl font-bold">Budget Calculator</h1>
           </div>
 
-          <Card>
-            <CardHeader>
-              <CardTitle>50/30/20 Budget Rule</CardTitle>
-              <CardDescription>
-                Calculate your ideal budget allocation based on the popular 50/30/20 rule adapted for Filipino families.
-              </CardDescription>
-            </CardHeader>
+          <div className="grid lg:grid-cols-3 gap-6">
+            <div className="lg:col-span-2">
+              <Card>
+                <CardHeader>
+                  <CardTitle>50/30/20 Budget Rule</CardTitle>
+                  <CardDescription>
+                    Calculate your ideal budget allocation based on the popular 50/30/20 rule adapted for Filipino families.
+                  </CardDescription>
+                </CardHeader>
             <CardContent className="space-y-6">
               <div className="space-y-2">
                 <Label htmlFor="income">Monthly Income (₱)</Label>
@@ -83,8 +105,17 @@ const BudgetCalculator = () => {
                   </Card>
                 </div>
               )}
-            </CardContent>
-          </Card>
+                </CardContent>
+              </Card>
+            </div>
+            
+            <div className="space-y-4">
+              <SmartRecommendations 
+                toolContext="budget-calculator" 
+                maxRecommendations={2} 
+              />
+            </div>
+          </div>
         </div>
       </div>
     </div>

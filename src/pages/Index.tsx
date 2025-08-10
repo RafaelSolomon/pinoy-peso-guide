@@ -3,6 +3,7 @@ import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/ca
 import { Badge } from "@/components/ui/badge";
 import { TrendingUp, Shield, BookOpen, Calculator, Users, Star } from "lucide-react";
 import { Link } from "react-router-dom";
+import SmartRecommendations from "@/components/SmartRecommendations";
 
 const Index = () => {
   return (
@@ -37,6 +38,13 @@ const Index = () => {
               </Button>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* Smart Recommendations Section */}
+      <section className="py-12 bg-gradient-to-br from-muted/30 to-background">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <SmartRecommendations showRiskFlags={true} maxRecommendations={3} />
         </div>
       </section>
 

@@ -1,17 +1,27 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { ArrowLeft } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useFinancialProfile } from "@/hooks/useFinancialProfile";
+import SmartRecommendations from "@/components/SmartRecommendations";
 
 const InvestmentCalculator = () => {
+  const { preFillData } = useFinancialProfile('investment-calculator');
   const [initialAmount, setInitialAmount] = useState("");
   const [monthlyContribution, setMonthlyContribution] = useState("");
   const [annualReturn, setAnnualReturn] = useState("8");
   const [years, setYears] = useState("10");
   const [results, setResults] = useState(null);
+
+  // Auto-fill from profile when available
+  useEffect(() => {
+    if (preFillData.monthlyContribution && !monthlyContribution) {
+      setMonthlyContribution(preFillData.monthlyContribution.toString());
+    }
+  }, [preFillData, monthlyContribution]);
 
   const calculateInvestment = () => {
     const initial = parseFloat(initialAmount) || 0;
@@ -46,7 +56,7 @@ const InvestmentCalculator = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-background to-secondary/20">
       <div className="container py-12">
-        <div className="max-w-2xl mx-auto">
+        <div className="max-w-6xl mx-auto">
           <div className="flex items-center mb-6">
             <Button asChild variant="ghost" size="icon" className="mr-4">
               <Link to="/tools">
@@ -56,13 +66,15 @@ const InvestmentCalculator = () => {
             <h1 className="text-3xl font-bold">Investment Growth Calculator</h1>
           </div>
 
-          <Card>
-            <CardHeader>
-              <CardTitle>Compound Interest Calculator</CardTitle>
-              <CardDescription>
-                See how your investments can grow over time with the power of compound interest.
-              </CardDescription>
-            </CardHeader>
+          <div className="grid lg:grid-cols-3 gap-6">
+            <div className="lg:col-span-2">
+              <Card>
+                <CardHeader>
+                  <CardTitle>Compound Interest Calculator</CardTitle>
+                  <CardDescription>
+                    See how your investments can grow over time with the power of compound interest.
+                  </CardDescription>
+                </CardHeader>
             <CardContent className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
@@ -150,8 +162,17 @@ const InvestmentCalculator = () => {
                   </Card>
                 </div>
               )}
-            </CardContent>
-          </Card>
+                </CardContent>
+              </Card>
+            </div>
+            
+            <div className="space-y-4">
+              <SmartRecommendations 
+                toolContext="investment-calculator" 
+                maxRecommendations={2} 
+              />
+            </div>
+          </div>
         </div>
       </div>
     </div>

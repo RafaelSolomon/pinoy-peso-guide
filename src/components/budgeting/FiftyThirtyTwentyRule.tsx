@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Progress } from "@/components/ui/progress";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Calculator } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useFinancialProfile } from "@/hooks/useFinancialProfile";
@@ -11,6 +12,7 @@ import { useFinancialProfile } from "@/hooks/useFinancialProfile";
 const FiftyThirtyTwentyRule = () => {
   const { preFillData, updateProfile } = useFinancialProfile('budget-calculator');
   const [income, setIncome] = useState("");
+  const [incomeFrequency, setIncomeFrequency] = useState("monthly");
   const [actualNeeds, setActualNeeds] = useState("");
   const [actualWants, setActualWants] = useState("");
   const [actualSavings, setActualSavings] = useState("");
@@ -23,9 +25,20 @@ const FiftyThirtyTwentyRule = () => {
     }
   }, [preFillData, income]);
 
+  const convertToMonthlyIncome = (amount: number, frequency: string) => {
+    switch (frequency) {
+      case 'daily': return amount * 30; // Assume 30 working days
+      case 'weekly': return amount * 4.33; // Average weeks per month
+      case 'bi-weekly': return amount * 2.17; // Average bi-weekly periods per month
+      case 'monthly': return amount;
+      default: return amount;
+    }
+  };
+
   const calculateBudget = () => {
-    const monthlyIncome = parseFloat(income);
-    if (monthlyIncome > 0) {
+    const inputIncome = parseFloat(income);
+    if (inputIncome > 0) {
+      const monthlyIncome = convertToMonthlyIncome(inputIncome, incomeFrequency);
       const idealNeeds = monthlyIncome * 0.5;
       const idealWants = monthlyIncome * 0.3;
       const idealSavings = monthlyIncome * 0.2;
@@ -92,15 +105,31 @@ const FiftyThirtyTwentyRule = () => {
       </CardHeader>
       <CardContent className="space-y-6">
         <div className="grid gap-4">
-          <div className="space-y-2">
-            <Label htmlFor="income">Monthly Income (₱)</Label>
-            <Input
-              id="income"
-              type="number"
-              placeholder="Enter your monthly income"
-              value={income}
-              onChange={(e) => setIncome(e.target.value)}
-            />
+          <div className="grid md:grid-cols-2 gap-4">
+            <div className="space-y-2">
+              <Label htmlFor="income">Income Amount (₱)</Label>
+              <Input
+                id="income"
+                type="number"
+                placeholder="Enter your income amount"
+                value={income}
+                onChange={(e) => setIncome(e.target.value)}
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="frequency">Income Frequency</Label>
+              <Select value={incomeFrequency} onValueChange={setIncomeFrequency}>
+                <SelectTrigger>
+                  <SelectValue placeholder="Select frequency" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="daily">Daily Income</SelectItem>
+                  <SelectItem value="weekly">Weekly Income</SelectItem>
+                  <SelectItem value="bi-weekly">Bi-Weekly Income</SelectItem>
+                  <SelectItem value="monthly">Monthly Income</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
           </div>
           
           <div className="grid md:grid-cols-3 gap-4">

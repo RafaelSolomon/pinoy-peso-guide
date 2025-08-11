@@ -2,32 +2,30 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Calculator, PiggyBank, Target, TrendingUp } from "lucide-react";
+import { Link } from "react-router-dom";
+import FiftyThirtyTwentyRule from "@/components/budgeting/FiftyThirtyTwentyRule";
+import GoalBasedBudgeting from "@/components/budgeting/GoalBasedBudgeting";
+import SmartRecommendations from "@/components/SmartRecommendations";
 
 const Budgeting = () => {
-  const budgetingTips = [
+  const quickLinks = [
     {
-      title: "50/30/20 Rule",
-      description: "Allocate 50% for needs, 30% for wants, and 20% for savings and debt payments.",
-      icon: <Calculator className="h-8 w-8 text-primary" />,
-      difficulty: "Beginner"
+      title: "Budget Calculator",
+      description: "Use our full-featured budget calculator with 50/30/20 analysis",
+      icon: <Calculator className="h-6 w-6 text-primary" />,
+      link: "/tools/budget-calculator"
     },
     {
-      title: "Emergency Fund",
-      description: "Build 3-6 months of expenses as your financial safety net.",
-      icon: <PiggyBank className="h-8 w-8 text-primary" />,
-      difficulty: "Essential"
+      title: "Emergency Fund Calculator",
+      description: "Plan and track your emergency fund progress",
+      icon: <PiggyBank className="h-6 w-6 text-primary" />,
+      link: "/tools/emergency-fund-calculator"
     },
     {
-      title: "Goal-Based Budgeting",
-      description: "Create specific budgets for your financial goals like travel or home purchase.",
-      icon: <Target className="h-8 w-8 text-primary" />,
-      difficulty: "Intermediate"
-    },
-    {
-      title: "Income Tracking",
-      description: "Monitor all income sources including side hustles and passive income.",
-      icon: <TrendingUp className="h-8 w-8 text-primary" />,
-      difficulty: "Advanced"
+      title: "Investment Calculator",
+      description: "Calculate returns and plan your investment strategy",
+      icon: <TrendingUp className="h-6 w-6 text-primary" />,
+      link: "/tools/investment-calculator"
     }
   ];
 
@@ -42,47 +40,56 @@ const Budgeting = () => {
           </p>
         </div>
 
-        {/* Featured Content */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-8 mb-12">
-          {budgetingTips.map((tip, index) => (
-            <Card key={index} className="group hover:shadow-lg transition-all duration-300">
+        {/* Interactive Budgeting Tools */}
+        <div className="grid lg:grid-cols-3 gap-8 mb-12">
+          <div className="lg:col-span-2 space-y-8">
+            <FiftyThirtyTwentyRule />
+            <GoalBasedBudgeting />
+          </div>
+          
+          <div className="space-y-6">
+            <SmartRecommendations 
+              toolContext="budgeting" 
+              maxRecommendations={3} 
+            />
+            
+            <Card>
               <CardHeader>
-                <div className="flex items-start justify-between">
-                  <div className="flex items-center space-x-3">
-                    {tip.icon}
-                    <div>
-                      <CardTitle className="text-xl">{tip.title}</CardTitle>
-                      <Badge variant="secondary" className="mt-2">
-                        {tip.difficulty}
-                      </Badge>
-                    </div>
-                  </div>
-                </div>
-                <CardDescription className="text-base mt-4">
-                  {tip.description}
-                </CardDescription>
+                <CardTitle className="text-lg">Quick Access Tools</CardTitle>
               </CardHeader>
-              <CardContent>
-                <Button variant="outline" className="w-full group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
-                  Learn More
-                </Button>
+              <CardContent className="space-y-3">
+                {quickLinks.map((link, index) => (
+                  <Button key={index} asChild variant="outline" className="w-full justify-start h-auto p-4">
+                    <Link to={link.link}>
+                      <div className="flex items-center gap-3">
+                        {link.icon}
+                        <div className="text-left">
+                          <div className="font-medium">{link.title}</div>
+                          <div className="text-xs text-muted-foreground">{link.description}</div>
+                        </div>
+                      </div>
+                    </Link>
+                  </Button>
+                ))}
               </CardContent>
             </Card>
-          ))}
+          </div>
         </div>
 
         {/* CTA Section */}
         <div className="text-center bg-primary/5 rounded-lg p-8">
-          <h2 className="text-2xl font-bold mb-4">Ready to Start Budgeting?</h2>
+          <h2 className="text-2xl font-bold mb-4">Master Your Financial Future</h2>
           <p className="text-muted-foreground mb-6">
-            Use our free budgeting calculator to create your personalized financial plan.
+            Start with these interactive budgeting tools and build a personalized financial plan that works for Filipino families.
           </p>
-          <Button size="lg" className="mr-4">
-            Use Budget Calculator
-          </Button>
-          <Button variant="outline" size="lg">
-            Download Guide
-          </Button>
+          <div className="flex flex-wrap justify-center gap-4">
+            <Button asChild size="lg">
+              <Link to="/tools">Explore All Tools</Link>
+            </Button>
+            <Button asChild variant="outline" size="lg">
+              <Link to="/tools/budget-calculator">Advanced Calculator</Link>
+            </Button>
+          </div>
         </div>
       </div>
     </div>
